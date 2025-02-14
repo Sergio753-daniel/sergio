@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Dancing+Script&family=Water+Brush&display=swap"
+        rel="stylesheet">
+    <title>San Valentín</title>
+    <style>
+        body {
+            background-color: #e29390;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "Bona Nova SC", serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .phrase {
+            font-size: 3em;
+            color: #690d94;
+            animation: fadeIn 2s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 10;
+            margin-left: 20px;
+        }
+        #titulo {
+            margin-left: 100px;
+
+
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0.2;
+            }
+
+            100% {
+                opacity: 5;
+            }
+        }
+
+        .heart {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #ff3333;
+            animation: move 10s linear infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #ff3333;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -25px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 25px;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="phrase">
+        <h1 id="titulo">Feliz San Valentín❤️🌹</h1>
+         <!-- <h2> Hoy brindaré por el día del amor y la amistad con mi cómplice de las emociones más profundas,
+            con la persona más linda, con la morocha mas hermosa.
+            </h2> -->
+            <h2> Tú no sabes el desorden de emociones que me provoca tu sonrisa. Te amo!🥰 😘
+                </h2>
+    </div>
+    <div id="hearts-container"></div>
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            document.getElementById('hearts-container').appendChild(heart);
+
+            heart.style.top = `${Math.random() * 100}vh`;
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.transform = 'rotate(-45deg)';
+
+            let randomDirection = Math.random() * 360;
+            let speed = Math.random() * 5 + 2;
+
+            function moveHeart() {
+                let x = parseFloat(heart.style.left);
+                let y = parseFloat(heart.style.top);
+
+                x += speed * Math.cos(randomDirection * Math.PI / 180);
+                y += speed * Math.sin(randomDirection * Math.PI / 180);
+
+                if (x < 0 || x > window.innerWidth || y < 0 || y > window.innerHeight) {
+                    randomDirection = Math.random() * 360;
+                }
+
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+
+                requestAnimationFrame(moveHeart);
+            }
+
+            moveHeart();
+        }
+
+        for (let i = 0; i < 10; i++) {
+            createHeart();
+        }
+    </script>
+</body>
+
+</html>
